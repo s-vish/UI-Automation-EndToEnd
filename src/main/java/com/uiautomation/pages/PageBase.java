@@ -1,5 +1,6 @@
 package com.uiautomation.pages;
 
+import com.uiautomation.utilities.TestUtil;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +19,7 @@ public class PageBase {
         this.driver = driver;
 
         PageFactory.initElements(driver, this);
-        wait =  new WebDriverWait(driver, 10);
+        wait =  new WebDriverWait(driver, TestUtil.EXPLICIT_WAIT);
     }
 
     public void waitForElementVisibility(WebElement element)
