@@ -26,10 +26,7 @@ public class PageBase {
     {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-    //click
-    //sendkey
-    //gettext
-    //
+
     public void clickElement(WebElement element)
     {
         waitForElementVisibility(element);

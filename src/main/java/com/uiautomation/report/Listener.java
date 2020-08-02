@@ -2,6 +2,7 @@ package com.uiautomation.report;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -20,12 +21,13 @@ public class Listener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-
+    test.log(Status.PASS,"Test case "+result.getMethod().getMethodName()+" is passed");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-
+        test.log(Status.FAIL,"Test case "+result.getMethod().getMethodName()+" is Failed");
+        test.log(Status.FAIL,result.getThrowable());
     }
 
     @Override

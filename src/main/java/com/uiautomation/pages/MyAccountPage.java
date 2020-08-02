@@ -27,18 +27,6 @@ public class MyAccountPage extends PageBase {
     @FindBy(xpath ="//p/strong")
     private WebElement usernameText;
 
-//    public String login(String emailID, String pass)
-//    {
-//
-//
-//        username.clear();
-//        username.sendKeys(emailID);
-//        password.clear();
-//        password.sendKeys(pass);
-//        loginButton.click();
-//        waitForElementVisibility(usernameText);
-//       return usernameText.getText();
-//    }
     public void enterUsername(String email)
     {
 
