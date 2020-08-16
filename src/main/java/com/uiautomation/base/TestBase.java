@@ -1,4 +1,4 @@
-package com.uiautomation.testcases.base;
+package com.uiautomation.base;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -20,10 +20,10 @@ import org.testng.annotations.BeforeMethod;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-public class TestBase implements ITestListener {
+public class TestBase {
 
     public static WebDriver driver;
-    public Properties prop;
+    public static Properties prop;
     public ExtentReports report;
     public ExtentTest test;
     public String path = System.getProperty("user.dir");
@@ -38,37 +38,19 @@ public class TestBase implements ITestListener {
     }
 
 
-
-@BeforeMethod
-public void onTestStart(ITestResult result) {
-
-    report = ReportManager.generateReport();
-    test = report.createTest(result.getMethod().getMethodName());
-    result.setAttribute("ExtentTestObject", test);
-}
-
-    @Override
-    public void onTestSuccess(ITestResult result) {
-        test.log(Status.PASS,"Test case "+result.getMethod().getMethodName()+" is passed");
+    @BeforeMethod
+    public void init(ITestResult result) {
+        report = ReportManager.generateReport();
+        // this line of code will print the methods name which is calling this init
+        // method.
+        test = report.createTest(result.getMethod().getMethodName());
+        result.setAttribute("ExtentTestObject", test);
     }
 
-    @Override
-    public void onTestFailure(ITestResult result) {
-        test.log(Status.FAIL,"Test case "+result.getMethod().getMethodName()+" is Failed");
-        test.log(Status.FAIL,result.getThrowable());
-    }
-
-    @Override
-    public void onTestSkipped(ITestResult result) {
-
-    }
-
-
-    @Override
-    public void onFinish(ITestContext context) {
+    @AfterMethod
+    public void reportFlush() {
         report.flush();
     }
-
 
 
 
@@ -106,9 +88,10 @@ public void onTestStart(ITestResult result) {
            driver.quit();
         }
 
-
-
-
-
+    public void log(Status status, String str) {
+        System.out.println(str);
+        test.log(status, str);
+    }
 
     }
+

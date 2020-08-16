@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="UI-Automation-EndToEnd" parallel="false">
 <listeners>
-    <listener class-name="com.uiautomation.testcases.base.TestBase"></listener>
+    <listener class-name="com.uiautomation.report.Listener"></listener>
 </listeners>
 
     <test name="UI-Automation">

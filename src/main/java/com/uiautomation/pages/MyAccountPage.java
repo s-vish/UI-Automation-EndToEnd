@@ -27,6 +27,9 @@ public class MyAccountPage extends PageBase {
     @FindBy(xpath ="//p/strong")
     private WebElement usernameText;
 
+    @FindBy(xpath = "//ul[@class='woocommerce-error']/li")
+    private WebElement errorText;
+
     public void enterUsername(String email)
     {
 
@@ -45,7 +48,17 @@ public class MyAccountPage extends PageBase {
 
     public String getUserName()
     {
-       return readText(usernameText);
+        waitForElementVisibility(usernameText);
+        return readText(usernameText);
     }
 
+    public boolean isDisplayed()
+    {
+        waitForElementVisibility(errorText);
+        return errorText.isDisplayed();
+    }
+
+    public String ErroInfoReadText() {
+        return readText(errorText);
+    }
 }
