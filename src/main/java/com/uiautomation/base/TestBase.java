@@ -1,4 +1,4 @@
-package com.uiautomation.testcases.base;
+package com.uiautomation.base;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.ITestContext;
+import org.testng.ITestListener;
 import org.testng.ITestResult;
 import com.aventstack.extentreports.Status;
 import org.testng.annotations.AfterClass;
@@ -21,33 +23,32 @@ import java.util.Properties;
 public class TestBase {
 
     public static WebDriver driver;
-    public Properties prop;
+    public static Properties prop;
     public ExtentReports report;
     public ExtentTest test;
-
+    public String path = System.getProperty("user.dir");
     public TestBase() {
         try {
             prop = new Properties();
-            FileInputStream fis = new FileInputStream("src/main/java/com/uiautomation/configuration/config.properties");
+            FileInputStream fis = new FileInputStream(path+"/src/main/java/com/uiautomation/configuration/config.properties");
             prop.load(fis);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+
     @BeforeMethod
-    public void reportGenerator(ITestResult result) {
+    public void init(ITestResult result) {
         report = ReportManager.generateReport();
         // this line of code will print the methods name which is calling this init
         // method.
         test = report.createTest(result.getMethod().getMethodName());
         result.setAttribute("ExtentTestObject", test);
-
     }
 
     @AfterMethod
-    public void reportFlush()
-    {
+    public void reportFlush() {
         report.flush();
     }
 
@@ -87,12 +88,10 @@ public class TestBase {
            driver.quit();
         }
 
-
     public void log(Status status, String str) {
-        System.out.println(str); //print in console
+        System.out.println(str);
         test.log(status, str);
     }
 
-
-
     }
+

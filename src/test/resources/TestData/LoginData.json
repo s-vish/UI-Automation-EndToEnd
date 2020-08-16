@@ -1,0 +1,10 @@
+{
+  "valid": {
+    "email": "testautomationui@gmail.com",
+    "pass": "&*test@*&123"
+  },
+  "invalid": {
+    "email": "testautomationui@gmail.comm",
+    "pass": "&*test@*&123"
+  }
+}
